@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) throws IOException {
 
         Map<URL, String> yesterday = new HashMap<>();
         yesterday.put(new URL("http://test1.com/page1"), "Old Content Page 1");
@@ -26,6 +27,7 @@ public class Main {
         TextCreator formatter = new TextCreator();
         String report = formatter.createText(changes);
 
-        System.out.println(report);
+        String filePath = "report.txt";
+        formatter.saveTextToFile(report, filePath);
     }
 }

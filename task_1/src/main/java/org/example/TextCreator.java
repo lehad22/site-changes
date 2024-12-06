@@ -1,6 +1,9 @@
 package org.example;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Set;
 
 public class TextCreator {
@@ -24,13 +27,17 @@ public class TextCreator {
         return reportBuilder.toString();
     }
 
-    private static void appendUrls(StringBuilder report, Set<URL> urls) {
+    private static void appendUrls(StringBuilder reportBuilder, Set<URL> urls) {
         if (urls.isEmpty()) {
-            report.append(" - Нет изменений.\n");
+            reportBuilder.append(" - Нет изменений.\n");
         } else {
             for (URL url : urls) {
-                report.append(" - ").append(url).append("\n");
+                reportBuilder.append(" - ").append(url).append("\n");
             }
         }
+    }
+    public void saveTextToFile(String text, String filePath) throws IOException, IOException {
+        Path path = Path.of(filePath);
+        Files.writeString(path, text);
     }
 }
