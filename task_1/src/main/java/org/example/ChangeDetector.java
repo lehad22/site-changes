@@ -13,17 +13,13 @@ public class ChangeDetector {
         Set<URL> appeared = new HashSet<>();
         Set<URL> changed = new HashSet<>();
 
-        for (Map.Entry<? extends URL, String> entry : yesterday.entrySet()) {
-            URL url = entry.getKey();
-            String oldContent = entry.getValue();
+        for (URL url : yesterday.keySet()) {
             if (!today.containsKey(url)) {
                 disappeared.add(url);
             }
-            else {
-                String newContent = today.get(url);
-                if (!oldContent.equals(newContent)) {
-                    changed.add(url);
-                }
+            else if(!today.get(url).equals(yesterday.get(url))) {
+                changed.add(url);
+
             }
         }
         for (URL url : today.keySet()) {
